@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe 'Incorrect user details produces a valid error' do
 
+  after(:all) do
+    sleep 3
+  end
   context 'it should respond with the correct error when incorrect details are submitted' do
     it "should produce an error when inputting incorrect password to an incorrect username" do
       @bbc_site = BbcSite.new
@@ -34,6 +37,17 @@ describe 'Incorrect user details produces a valid error' do
       @bbc_site.bbc_sign_in_page.click_sign_in_button
 
       expect(@bbc_site.bbc_sign_in_page.invalid_password_length_error_message).to eq true
+    end
+
+    it "should produce an error when inputting an incorrect email and password combination" do
+      @bbc_site = BbcSite.new
+      @bbc_site.bbc_homepage.visit_homepage
+      @bbc_site.bbc_homepage.click_sign_in_link
+      @bbc_site.bbc_sign_in_page.fill_username_field_existing_username
+      @bbc_site.bbc_sign_in_page.fill_password_field_valid
+      @bbc_site.bbc_sign_in_page.click_sign_in_button
+      sleep 3
+      expect(@bbc_site.bbc_sign_in_page.invalid_username_password_combination_error_message).to eq true
     end
   end
 

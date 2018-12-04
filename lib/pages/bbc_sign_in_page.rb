@@ -11,7 +11,11 @@ class BbcSignInPage
   end
 
   def fill_username_field_valid
-    fill_in('user-identifier-input', :with => 'dadeatsf=')
+    fill_in('user-identifier-input', :with => 'micheal2')
+  end
+
+  def fill_username_field_existing_username
+    fill_in('user-identifier-input', :with => 'ManUtd')
   end
 
   def invalid_username_error_message
@@ -23,7 +27,7 @@ class BbcSignInPage
   end
 
   def fill_password_field_invalid_format
-    fill_in('password-input', :with => 'happy')
+    fill_in('password-input', :with => 'happyyyyy')
   end
 
   def fill_password_field_invalid_length
@@ -35,13 +39,18 @@ class BbcSignInPage
   end
 
   def invalid_password_format_error_message
-    find('#form-message-password').text.include?("Sorry, that password is too short. It needs to be eight characters or more.")
+    find('#form-message-password').text.include?("Sorry, that password isn't valid. Please include something that isn't a letter.")
   end
 
   def invalid_password_length_error_message
     find('#form-message-password').text.include?("Sorry, that password is too short. It needs to be eight characters or more.")
   end
 
+  def invalid_username_password_combination_error_message
+    find('#form-message-password').text.include?("Uh oh, that password doesn’t match that account. Please try again")
+  end
 
+  def invalid_
 
+  end
 end
